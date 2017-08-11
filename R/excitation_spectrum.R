@@ -3,12 +3,12 @@
 #' @param select_emission Selected emission wavelenght in nm. An excitation spectrum will be generated for this specific emission.  Default is 350 for exampling purposes.
 #' @param data_list The default value of "data_interpol" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise a list containing x=vector of emission wavelenghts, y=vector of excitation wavelenghts, z= a matrix containing the z values (intensity) where X must be the lines, Y must be the columns and Z must be the values of the table.
 #' @param excitation_range The default value of "data_interpol$y" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise it must be a vector containing the excitation wavelenghts range.
-#' @param export_pdf In progress
-#' @param export_png In progress
+#' @param export_pdf TRUE or FALSE.
+#' @param export_png TRUE or FALSE.
 #' @param directory Default is the working directory. Better not change it.
-#' @param area_under_graph In progress
-#' @param start_exci In progress
-#' @param end_exci In progress
+#' @param area_under_graph TRUE or FALSE. If any calculation of area under curve will be performed.
+#' @param start_exci Excitation start if area_under_graph is TRUE.
+#' @param end_exci Excitation end if area_under_graph is TRUE.
 #' @param sample_name_ Default is the output from processing function. Better not change it.
 #' @keywords 3D fluorescence
 #' @export

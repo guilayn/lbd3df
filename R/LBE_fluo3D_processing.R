@@ -7,7 +7,7 @@
 #' @param excitation_start Default = 200. Only change if you are not using the default scan3D method. Otherwise, it is your first excitation wavelenght (nm).
 #' @param excitation_end Default = 590. Only change if you are not using the default scan3D method. Otherwise, it is your last excitation wavelenght (nm).
 #' @param excitation_step Default = 10. Only change if you are not using the default scan3D method. Change to 20 might be useful if you are running the fast method. Otherwise, it is your excitation step (nm).
-#' @param export_3D_matrix Default = TRUE. Boolean (TRUE or FALSE). Use it to export or not the processed data matrix into csv files.
+#' @param export_3D_matrix Default = TRUE. Accepts TRUE or FALSE. Use it to export or not the processed data matrix into csv files.
 #' @param increase_resolution If you want a more beautiful plot chose TRUE to increase the excitation step from your original to new_excitation_step.
 #' @param new_excitation_step See increase_resolution. No effect if increase_resolution is FALSE.
 #' @param emission_start Default = 200. See excitation_start for details. Your first emission wavelenght (nm).
@@ -115,7 +115,7 @@ LBE_fluo3D_processing=function(first_spectrum_line=55,
   complete_vector_orig=complete_vector
 
   print("Creating xyz casted data frame")
-  xy_vector=dcast(complete_vector, x_emission ~ y_excitation)  #from melt to casted
+  xy_vector=dcast(complete_vector, x_emission ~ y_excitation, value.var = "z_intensity")  #from melt to casted
   x_vector=xy_vector[,1]
   x_vector_orig=x_vector
   xy_vector=xy_vector[,2:ncol(xy_vector)]
@@ -182,7 +182,7 @@ LBE_fluo3D_processing=function(first_spectrum_line=55,
 
   #### Re-creating complete 3D vector: casted (short) and melted (long) table versions ####
   print("Creating final vectors")
-  xy_vector_final=dcast(complete_vector_temp, x_emission ~ y_excitation)  #from melt to casted
+  xy_vector_final=dcast(complete_vector_temp, x_emission ~ y_excitation, value.var = "z_intensity")  #from melt to casted
   x_vector_final=xy_vector_final[,1]
   xy_vector_final=xy_vector_final[,2:ncol(xy_vector_final)]
   row.names(xy_vector_final)=x_vector_final

@@ -23,7 +23,7 @@ LBE_fluo3D_processing(first_spectrum_line = 55,
 
 \item{excitation_step}{Default = 10. Only change if you are not using the default scan3D method. Change to 20 might be useful if you are running the fast method. Otherwise, it is your excitation step (nm).}
 
-\item{export_3D_matrix}{Default = TRUE. Boolean (TRUE or FALSE). Use it to export or not the processed data matrix into csv files.}
+\item{export_3D_matrix}{Default = TRUE. Accepts TRUE or FALSE. Use it to export or not the processed data matrix into csv files.}
 
 \item{increase_resolution}{If you want a more beautiful plot chose TRUE to increase the excitation step from your original to new_excitation_step.}
 

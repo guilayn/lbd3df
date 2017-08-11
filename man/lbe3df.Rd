@@ -25,4 +25,5 @@ single_point_extrapolation(), returns intensity value given any emission and exc
 >excitation_spectrum(420) #export pdf of a excitation spectrum plot at emission = 420 nm. ?excitation_spectrum for details.
 >emission_spectrum(420) #export pdf of a emission spectrum plot at excitation = 420 nm. ?emission_spectrum for details.
 >single_point_extrapolation(350,420) #returns an intensity value at emission = 350 and excitation = 420 nm. ?single_point_extrapolation for details
+>LBE_fluo3D_process_all() #Used to apply the functions above to a whole set of 3D spectra. See ?LBE_fluo3D_process_all for details.
 }

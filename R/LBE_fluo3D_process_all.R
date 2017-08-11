@@ -1,12 +1,21 @@
 #' Applies 3D Fluoresce processing and plotting to every subfolder within a given folder.
+#'
+#'
 #' IMPORTANT:
-#' 1) EVERY SUBFOLDER MUST PRESENT THE SAME CONFIGURATION OF SPECTRA (ANALYSIS METHOD)
-#' 2) THE CODE WILL STOP IF THERE IS ANY SUBFOLDER CONTAINING ANYTHING ELSE THAN SPECTRUM WITH .SP FILES
+#'
+#'
+#' 1) EVERY SUBFOLDER MUST PRESENT THE SAME CONFIGURATION OF SPECTRA (ANALYSIS METHOD), FOR A SINGLE SPECTRA
+#' Reminder: The default internal method results in 40 .sp files called XXX#01, XXX#02, ..., XXX#40 where XXX is the label defined by the user.
+#'
+#'
+#' 2) THE CODE WILL DETECT AND STOP IF THERE IS ANY SUBFOLDER THAT DOESN'T SATISTIFY THE CONDITION ABOVE
+#'
 #'
 #' @param plot_all Default = TRUE. Use FALSE to avoid plotting.
 #' @param exci_spec Default = FALSE. Use TRUE to include this function and specify emission as in excitation_spectrum()
 #' @param emi_spec Default = FALSE. Use TRUE to include this function and specify excitation as in emission_spectrum()
 #' @param indic Default = TRUE. Will include calculation of indicators to every spectrum.
+#' @param zones_calc Default = TRUE. Will include calculation of volumes and barycenters of each zone to every spectrum.
 #' @param args_process List containing the conditions for the function LBE_fluo3D_processing. See individual help files for details (?LBE_fluo3D_processing)
 #' @param args_plot List containing the conditions for the function LBE_fluo3D_levelplot See individual help files for details (?LBE_fluo3D_levelplot)
 #' @param args_exci List containing the conditions for the function excitation_spectrum See individual help files for details (?excitation_spectrum)
@@ -36,11 +45,13 @@ LBE_fluo3D_process_all=function(
   exci_spec = FALSE,
   emi_spec = FALSE,
   indic = TRUE,
-  args_process = list(...),
-  args_plot = list(...),
-  args_exci= list(...),
-  args_emi = list(...),
-  args_indic = list(...),
+  zones_calc = TRUE,
+  zones_polygons = "Default",
+  args_process = list(increase_resolution=FALSE, remove_difdif=TRUE),
+  args_plot = list(plot_zones_polygons = TRUE, export_html = TRUE,export_png = TRUE, export_pdf = TRUE),
+  args_exci= list(),
+  args_emi = list(),
+  args_indic = list(),
   all_directory=getwd()
   ) {
   print("Processing all folders")
@@ -67,7 +78,25 @@ LBE_fluo3D_process_all=function(
       } else {
         summary_temp=data.frame(row.names=names(result_indicators),Value=unlist(result_indicators))
         summary_indicators=data.frame(summary_indicators,summary_temp)}
-      write.csv2(summary_indicators,paste0(all_directory,"/Summary_3DF_indicators.csv"),col.names = FALSE)}
+      write.csv2(t(summary_indicators),paste0(all_directory,"/Summary_3DF_indicators.csv"),row.names = FALSE)}
+
+    if (zones_calc) {
+
+      do.call(LBE_fluo3D_zones_volume,c(list(directory=subfolders_initial[k])))
+
+      if (k==1) {
+        summary_zones_calculation=polygons_summary
+      } else {
+      summary_zones_calculation=rbind(summary_zones_calculation,polygons_summary)} #add the next summary on the botton
+
+if (k==number_subfolders) {
+      write.csv2(summary_zones_calculation,paste0(all_directory,"/Summary_zones_calculations.csv"),row.names = FALSE)
+  melt_summary_zones_calculation=melt(summary_zones_calculation[,c(1,2,4)],c("sample","zone"))
+  melt_summary_zones_calculation=melt_summary_zones_calculation[,-3]
+  colnames(melt_summary_zones_calculation)[3]="Vol_per"
+      write.csv2(melt_summary_zones_calculation,paste0(all_directory,"/Summary_zones_calculations_MELT.csv"),row.names = FALSE)
+}
+      }
 
 
 } #end of loop k

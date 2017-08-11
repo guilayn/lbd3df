@@ -2,15 +2,15 @@
 % Please edit documentation in R/LBE_fluo3D_process_all.R
 \name{LBE_fluo3D_process_all}
 \alias{LBE_fluo3D_process_all}
-\title{Applies 3D Fluoresce processing and plotting to every subfolder within a given folder.
-IMPORTANT:
-1) EVERY SUBFOLDER MUST PRESENT THE SAME CONFIGURATION OF SPECTRA (ANALYSIS METHOD)
-2) THE CODE WILL STOP IF THERE IS ANY SUBFOLDER CONTAINING ANYTHING ELSE THAN SPECTRUM WITH .SP FILES}
+\title{Applies 3D Fluoresce processing and plotting to every subfolder within a given folder.}
 \usage{
 LBE_fluo3D_process_all(plot_all = TRUE, exci_spec = FALSE,
-  emi_spec = FALSE, indic = TRUE, args_process = list(...),
-  args_plot = list(...), args_exci = list(...), args_emi = list(...),
-  args_indic = list(...), all_directory = getwd())
+  emi_spec = FALSE, indic = TRUE, zones_calc = TRUE,
+  zones_polygons = "Default", args_process = list(increase_resolution =
+  FALSE, remove_difdif = TRUE), args_plot = list(plot_zones_polygons = TRUE,
+  export_html = TRUE, export_png = TRUE, export_pdf = TRUE),
+  args_exci = list(), args_emi = list(), args_indic = list(),
+  all_directory = getwd())
 }
 \arguments{
 \item{plot_all}{Default = TRUE. Use FALSE to avoid plotting.}
@@ -20,6 +20,8 @@ LBE_fluo3D_process_all(plot_all = TRUE, exci_spec = FALSE,
 \item{emi_spec}{Default = FALSE. Use TRUE to include this function and specify excitation as in emission_spectrum()}
 
 \item{indic}{Default = TRUE. Will include calculation of indicators to every spectrum.}
+
+\item{zones_calc}{Default = TRUE. Will include calculation of volumes and barycenters of each zone to every spectrum.}
 
 \item{args_process}{List containing the conditions for the function LBE_fluo3D_processing. See individual help files for details (?LBE_fluo3D_processing)}
 
@@ -34,10 +36,13 @@ LBE_fluo3D_process_all(plot_all = TRUE, exci_spec = FALSE,
 \item{all_directory}{Directory containing subfolders with .sp 3D fluorescence files. Default is the directory used by the user. Might be useful to manually specify another.}
 }
 \description{
-Applies 3D Fluoresce processing and plotting to every subfolder within a given folder.
 IMPORTANT:
-1) EVERY SUBFOLDER MUST PRESENT THE SAME CONFIGURATION OF SPECTRA (ANALYSIS METHOD)
-2) THE CODE WILL STOP IF THERE IS ANY SUBFOLDER CONTAINING ANYTHING ELSE THAN SPECTRUM WITH .SP FILES
+}
+\details{
+1) EVERY SUBFOLDER MUST PRESENT THE SAME CONFIGURATION OF SPECTRA (ANALYSIS METHOD), FOR A SINGLE SPECTRA
+Reminder: The default internal method results in 40 .sp files called XXX#01, XXX#02, ..., XXX#40 where XXX is the label defined by the user.
+
+2) THE CODE WILL DETECT AND STOP IF THERE IS ANY SUBFOLDER THAT DOESN'T SATISTIFY THE CONDITION ABOVE
 }
 \examples{
 # (!!!) First of all, verify the conditions hilighted in "IMPORTANT". (!!!)
@@ -46,7 +51,8 @@ IMPORTANT:
                          args_process = list(remove_difdif=F),
                          args_plot = list(plot_zones_polygons=F,color_palette=2),
                          args_exci = list(select_emission=327,export_png=T,export_pdf=F),
-                         args_emi = list(select_excitation=328,export_png=F,export_pdf=T))
+                         args_emi = list(select_excitation=328,export_png=F,export_pdf=T),
+                         args_indic = list())
 # The code above will plot the gray spectrum (color_pallette=2, see ?LBE_fluo3D_levelplot for details), for all subfolders of XXXX.
 # It will not remove diffusion and diffraction peaks and outside areas (remove_difdif=F, see ?LBE_fluo3D_processing for details)
 # It will also plot excitation and emission 2D spectras for 327 and 328 emission and excitation wavelenghts, respectively.

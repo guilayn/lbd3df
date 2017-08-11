@@ -12,15 +12,15 @@ LBE_fluo3D_indicators(data_list = data_interpol, peak_ratio_AT = TRUE,
 \arguments{
 \item{data_list}{The default value of "data_interpol" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise a list containing x=vector of emission wavelenghts, y=vector of excitation wavelenghts, z= a matrix containing the z values (intensity) where X must be the lines, Y must be the columns and Z must be the values of the table.}
 
-\item{peak_ratio_AT}{Boolean (TRUE or FALSE).}
+\item{peak_ratio_AT}{TRUE or FALSE. Include the calculation or not.}
 
-\item{peak_ratio_CA}{Boolean (TRUE or FALSE).}
+\item{peak_ratio_CA}{TRUE or FALSE. Include the calculation or not.}
 
-\item{peak_ratio_CT}{Boolean (TRUE or FALSE).}
+\item{peak_ratio_CT}{TRUE or FALSE. Include the calculation or not.}
 
-\item{Humif_index}{Boolean (TRUE or FALSE).}
+\item{Humif_index}{TRUE or FALSE. Include the calculation or not.}
 
-\item{export_csv}{Boolean (TRUE or FALSE).}
+\item{export_csv}{TRUE or FALSE.}
 
 \item{directory}{Default is the working directory. Better not change it.}
 

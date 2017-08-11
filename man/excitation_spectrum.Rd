@@ -16,15 +16,15 @@ excitation_spectrum(select_emission = 254, data_list = data_interpol,
 
 \item{excitation_range}{The default value of "data_interpol$y" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise it must be a vector containing the excitation wavelenghts range.}
 
-\item{area_under_graph}{In progress}
+\item{area_under_graph}{TRUE or FALSE. If any calculation of area under curve will be performed.}
 
-\item{start_exci}{In progress}
+\item{start_exci}{Excitation start if area_under_graph is TRUE.}
 
-\item{end_exci}{In progress}
+\item{end_exci}{Excitation end if area_under_graph is TRUE.}
 
-\item{export_pdf}{In progress}
+\item{export_pdf}{TRUE or FALSE.}
 
-\item{export_png}{In progress}
+\item{export_png}{TRUE or FALSE.}
 
 \item{directory}{Default is the working directory. Better not change it.}
 

@@ -7,7 +7,8 @@
 LBE_fluo3D_levelplot(x = x_vector, y = y_vector, z = xy_vector,
   plot_zones_polygons = TRUE, export_html = FALSE, export_png = TRUE,
   export_pdf = TRUE, n_color = 10, color_palette = 1,
-  directory = directory_processing, sample_name_ = sample_name)
+  directory = directory_processing, sample_name_ = sample_name,
+  zones_polygons_ = "Default", polygon_dataframe_ = NA)
 }
 \arguments{
 \item{x}{The default value of "x_vector" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise it must be a vector containing the emission wavelenghts range.}
@@ -18,11 +19,11 @@ LBE_fluo3D_levelplot(x = x_vector, y = y_vector, z = xy_vector,
 
 \item{plot_zones_polygons}{Boolean (TRUE or FALSE). It allows you to chose wether you want to plot the polygons with the 7 zones or not.}
 
-\item{export_html}{Boolean (TRUE or FALSE). It allows you to chose wether you want to export a plotly html interactive file (might generate about 3 MB).}
+\item{export_html}{TRUE or FALSE. It allows you to chose wether you want to export a plotly html interactive file (might generate about 3 MB).}
 
-\item{export_png}{Boolean (TRUE or FALSE). It allows you to chose wether you want to export a png static plot.}
+\item{export_png}{TRUE or FALSE. It allows you to chose wether you want to export a png static plot.}
 
-\item{export_pdf}{Boolean (TRUE or FALSE). It allows you to chose wether you want to export a png static plot.}
+\item{export_pdf}{TRUE or FALSE. It allows you to chose wether you want to export a png static plot.}
 
 \item{n_color}{Number of colors that will be picked up in the color palette to build the color scale. Normally it is relevant only for color scales containing several colors.}
 
@@ -31,6 +32,10 @@ LBE_fluo3D_levelplot(x = x_vector, y = y_vector, z = xy_vector,
 \item{directory}{Default is the working directory. Better not change it.}
 
 \item{sample_name_}{Default is the output from processing function. Better not change it.}
+
+\item{zones_polygons_}{Default corresponds to the 7 zones defined in Jimenez et. al 2015.}
+
+\item{polygon_dataframe_}{a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
 }
 \description{
 After running LBE_fluo3D_processing() with your options, run this function to visualize and export your surface plot. Results (plots in pdf and/or png and/or interactive html) will be exported to a folder inside your directory called "Output_data".
