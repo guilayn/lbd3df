@@ -32,42 +32,60 @@ polygons_summary<<-data.frame(sample=sample_name_,zone=zones,Volume=NA,Vol_per=N
 
 #calculating volumes and centroids
 for (i in 1:number_zones) {
-print(paste0("Calculation of volume and barycenters. Zone ",i,"/",number_zones))
+
 id_temp=zones[i]
-x_min=min(list_polygons$x[which(list_polygons$id==id_temp)])
-x_max=max(list_polygons$x[which(list_polygons$id==id_temp)])
-y_min=min(list_polygons$y[which(list_polygons$id==id_temp)])
-y_max=max(list_polygons$y[which(list_polygons$id==id_temp)])
+
+zone_coords=list_polygons[which(list_polygons$id==id_temp),]
+print(paste0("Calculation of volume and barycenters. Zone ",i,"/",number_zones))
+
 
 #print(1)
-coordinates_matrix=as.matrix(list_polygons[which(list_polygons$id==id_temp),2:3])
+
+coordinates_matrix=as.matrix(zone_coords[,-1])
 melten_vector_i=ddply(melten_vector,c("x_emission","y_excitation"),here(mutate),z_intensity=polygon_detect(coordinates=coordinates_matrix,
                                                                                                      x=x_emission,
                                                                                                      y=y_excitation,
                                                                                                      z=z_intensity))
 
+#print(2)
+
 xy_vector_i=dcast(melten_vector_i,x_emission ~ y_excitation, value.var = "z_intensity")
+
+#print(3)
+
 rownames(xy_vector_i)=data_interpol$x
 xy_vector_i=xy_vector_i[,-1]
 #print(plot_ly(z=t(as.matrix(xy_vector_i)),x=as.numeric(x_vector), y=as.numeric(y_vector), type="contour"))
 
-#print(2)
+#print(4)
+
 emission_areas=ddply(melten_vector_i,c("x_emission"),
                       summarise,
                        area=trapz(x=y_excitation,
                                   y=z_intensity))
+#print(5)
 polygons_summary$barycenter_X[i]<<-weighted.mean(emission_areas$x_emission, emission_areas$area)
+
+#print(6)
 
 excitation_areas=ddply(melten_vector_i,c("y_excitation"),
                        summarise,
                        area=trapz(x=x_emission,
                                   y=z_intensity))
+
+#print(7)
+
 polygons_summary$barycenter_Y[i]<<-weighted.mean(excitation_areas$y_excitation, excitation_areas$area)
 
-#print(3)
+#print(8)
+
 volume_polygon_i=trapz(x=excitation_areas$y_excitation,y=excitation_areas$area)
+
+#print(9)
+
 polygons_summary$Volume[i]<<-volume_polygon_i
 }
+#print(10)
 polygons_summary<<-ddply(polygons_summary,"zone",mutate,Vol_per=100*Volume/(sum(polygons_summary$Volume)))
 
 polygons_summary<<-polygons_summary

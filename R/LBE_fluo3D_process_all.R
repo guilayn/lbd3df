@@ -78,7 +78,11 @@ LBE_fluo3D_process_all=function(
       } else {
         summary_temp=data.frame(row.names=names(result_indicators),Value=unlist(result_indicators))
         summary_indicators=data.frame(summary_indicators,summary_temp)}
-      write.csv2(t(summary_indicators),paste0(all_directory,"/Summary_3DF_indicators.csv"),row.names = FALSE)}
+
+      if (k==number_subfolders) {
+        write.csv2(t(summary_indicators),paste0(all_directory,"/Summary_3DF_indicators.csv"),row.names = FALSE)
+      }
+      }
 
     if (zones_calc) {
 

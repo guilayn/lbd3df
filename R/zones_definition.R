@@ -18,29 +18,38 @@ zones_definition=function(
 if (user_option == "Default") {
 
   polygon1=data.frame(id="I",
-                      x=c(216,325,325,275,216),
-                      y=c(200,200,260,260,200))
+                      x=c(250,330,330,280,250,250),
+                      y=c(199.5,199.5,249.5,249.5,219.5,199.5))
   polygon2=data.frame(id="II",
-                      x=c(325,390,390,325,325),
-                      y=c(200,200,260,260,200))
+                      x=c(330.5,390,390,330.5,330.5),
+                      y=c(199.5,199.5,249.5,249.5,199.5))
   polygon3=data.frame(id="III",
-                      x=c(275,390,390,325,275),
-                      y=c(260,260,310,310,260))
+                      x=c(280,	390,	390,	331.5,	280),
+                      y=c(250,	250,	299.5,	299.5,	250))
   polygon4=data.frame(id="IV",
-                      x=c(390,490,390,390),
-                      y=c(200,260,260,200))
+                      x=c(390.5,	488,	390.5,	390.5),
+                      y=c(204.5,	259.5,	259.5,	204.5))
   polygon5=data.frame(id="V",
-                      x=c(390,490,600,390,390),
-                      y=c(260,260,310,310,260))
+                      x=c(390.5,	488,	560,	390.5,	390.5),
+                      y=c(260,	260,	299.5,	299.5,	260))
   polygon6=data.frame(id="VI",
-                      x=c(325,600,600,396,325),
-                      y=c(310,310,380,380,310))
+                      x=c(331.5,	560,	595.5,	595.5,	413,	331.5),
+                      y=c(300,	300,	319.5,	379.5,	379.5,	300))
   polygon7=data.frame(id="VII",
-                      x=c(396,600,600,396),
-                      y=c(380,380,590,380))
+                      x=c(413,	595.5,	595.5,	413),
+                      y=c(380,	380,	559.5,	380))
   polygons_df=rbind(polygon1,polygon2,polygon3,polygon4,polygon5,polygon6,polygon7)
 } else {
   if (is.na(polygon_dataframe)) {stop("You didn't provide a data.frame containing the zones' polygons. Check ?zones_definition for details.")}
   polygons_df=polygon_dataframe}
   return(polygons_df)
 }
+
+
+
+
+
+
+
+
+

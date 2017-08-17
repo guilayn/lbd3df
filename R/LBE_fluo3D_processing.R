@@ -163,7 +163,7 @@ LBE_fluo3D_processing=function(first_spectrum_line=55,
 
 
   if (remove_difdif) {
-    print("Removing diffusion peaks and outside areas. Might take some minutes, especially if the resolution has been increased")
+    print("Removing diffusion peaks and outside areas. Might take a moment, especially if the resolution has been increased")
     complete_vector_temp=ddply(complete_vector_temp,c("x_emission","y_excitation"),transform,z_new=diffu_detect(x_emission, y_excitation, z_intensity))
     #kept to test the function: complete_vector_temp$z_intensity[which(complete_vector_temp$x==400 & complete_vector_temp$y==390)]
     #kept to test the function: complete_vector_temp$z_new[which(complete_vector_temp$x==400 & complete_vector_temp$y==390)]
@@ -172,7 +172,7 @@ LBE_fluo3D_processing=function(first_spectrum_line=55,
   }
 
   if (remove_difdif) {
-    print("Removing diffraction peaks and outside areas. Might take some minutes, especially if the resolution has been increased.")
+    print("Removing diffraction peaks and outside areas. Might take a moment, especially if the resolution has been increased.")
     complete_vector_temp=ddply(complete_vector_temp,c("x_emission","y_excitation"),transform,z_new=diffra_detect(x_emission, y_excitation, z_intensity))
     #kept to test the function: complete_vector_temp$z_intensity[which(complete_vector_temp$x==400 & complete_vector_temp$y==210)]
     #kept to test the function: complete_vector_temp$z_new[which(complete_vector_temp$x==503 & complete_vector_temp$y==260)]
