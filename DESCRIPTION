@@ -1,7 +1,7 @@
 Package: lbe3df
 Type: Package
 Title: 3D Fluorescence spectra processing
-Version: 0.0.2
+Version: 0.0.4
 Author: person("Felipe", "Guilayn", email = "felipe.guilayn@gmail.comn",role = c("aut", "cre"))
 Maintainer: The package maintainer <felipe.guilayn@gmail.com>
 Description: This package reads .sp files from 3D fluorescence spectra and rebuilds level plots and interpolations.
