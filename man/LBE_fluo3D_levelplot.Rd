@@ -8,7 +8,7 @@ LBE_fluo3D_levelplot(x = x_vector, y = y_vector, z = xy_vector,
   plot_zones_polygons = TRUE, export_html = FALSE, export_png = TRUE,
   export_pdf = TRUE, n_color = 10, color_palette = 1,
   directory = directory_processing, sample_name_ = sample_name,
-  zones_polygons_ = "Default", polygon_dataframe_ = NA)
+  zones_polygons_ = "Default")
 }
 \arguments{
 \item{x}{The default value of "x_vector" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise it must be a vector containing the emission wavelenghts range.}
@@ -33,9 +33,7 @@ LBE_fluo3D_levelplot(x = x_vector, y = y_vector, z = xy_vector,
 
 \item{sample_name_}{Default is the output from processing function. Better not change it.}
 
-\item{zones_polygons_}{Default corresponds to the 7 zones defined in Jimenez et. al 2015.}
-
-\item{polygon_dataframe_}{a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
+\item{zones_polygons_}{Default corresponds to the 7 zones defined in Jimenez et. al 2015. Otherwise, you must provide a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
 }
 \description{
 After running LBE_fluo3D_processing() with your options, run this function to visualize and export your surface plot. Results (plots in pdf and/or png and/or interactive html) will be exported to a folder inside your directory called "Output_data".

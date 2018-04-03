@@ -4,8 +4,7 @@
 #' @param xy_vector_ The default value of "xy_vector" is assuming that "LBE_fluo3D_processing" have just been used.
 #' @param sample_name_ Default is the output from processing function. Better not change it.
 #' @param directory Default is the working directory. Better not change it.
-#' @param zones_polygons_ Default corresponds to the 7 zones defined in Jimenez et. al 2015.
-#' @param polygon_dataframe_ a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.
+#' @param zones_polygons_ Default corresponds to the 7 zones defined in Jimenez et. al 2015. Otherwise, you must provide a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.
 #' @keywords 3D fluorescence
 #' @export
 #' @examples
@@ -16,10 +15,11 @@ LBE_fluo3D_zones_volume=function(data_list=data_interpol,
                                  xy_vector_=xy_vector,
                                  sample_name_=sample_name,
                                  directory=directory_processing,
-                                 zones_polygons_="Default",
-                                 polygon_dataframe_=NA)
+                                 zones_polygons_="Default")
 {
-list_polygons=zones_definition(zones_polygons_,polygon_dataframe_)
+list_polygons=zones_definition(zones_polygons_)
+print("Defined polygons:")
+print(list_polygons)
 xy_vector_=data.frame(emission=data_interpol$x,xy_vector_)
 colnames(xy_vector_)[2:ncol(xy_vector_)]=data_interpol$y
 melten_vector=melt(xy_vector_,id="emission")

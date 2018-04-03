@@ -17,10 +17,11 @@
 #' @param indic Default = TRUE. Will include calculation of indicators to every spectrum.
 #' @param zones_calc Default = TRUE. Will include calculation of volumes and barycenters of each zone to every spectrum.
 #' @param args_process List containing the conditions for the function LBE_fluo3D_processing. See individual help files for details (?LBE_fluo3D_processing)
-#' @param args_plot List containing the conditions for the function LBE_fluo3D_levelplot See individual help files for details (?LBE_fluo3D_levelplot)
-#' @param args_exci List containing the conditions for the function excitation_spectrum See individual help files for details (?excitation_spectrum)
-#' @param args_emi List containing the conditions for the function emission_spectrum See individual help files for details (?emission_spectrum)
-#' @param args_indic List containing the conditions for the function LBE_fluo3D_indicators See individual help files for details (?LBE_fluo3D_indicators)
+#' @param args_plot List containing the conditions for the function LBE_fluo3D_levelplot. See individual help files for details (?LBE_fluo3D_levelplot)
+#' @param args_volume List containing the conditions for the function LBE_fluo3D_zones_volule. See individual help files for details (?LBE_fluo3D_levelplot)
+#' @param args_exci List containing the conditions for the function excitation_spectrum. See individual help files for details (?excitation_spectrum)
+#' @param args_emi List containing the conditions for the function emission_spectrum. See individual help files for details (?emission_spectrum)
+#' @param args_indic List containing the conditions for the function LBE_fluo3D_indicators. See individual help files for details (?LBE_fluo3D_indicators)
 #' @param all_directory Directory containing subfolders with .sp 3D fluorescence files. Default is the directory used by the user. Might be useful to manually specify another.
 #' @keywords 3D fluorescence
 #' @export
@@ -48,7 +49,8 @@ LBE_fluo3D_process_all=function(
   zones_calc = TRUE,
   zones_polygons = "Default",
   args_process = list(increase_resolution=FALSE, remove_difdif=TRUE),
-  args_plot = list(plot_zones_polygons = TRUE, export_html = TRUE,export_png = TRUE, export_pdf = TRUE),
+  args_volume = list(zones_polygons_=zones_polygons),
+  args_plot = list(zones_polygons_=zones_polygons, plot_zones_polygons = TRUE, export_html = TRUE,export_png = TRUE, export_pdf = TRUE),
   args_exci= list(),
   args_emi = list(),
   args_indic = list(),
@@ -86,7 +88,7 @@ LBE_fluo3D_process_all=function(
 
     if (zones_calc) {
 
-      do.call(LBE_fluo3D_zones_volume,c(list(directory=subfolders_initial[k])))
+      do.call(LBE_fluo3D_zones_volume,c(list(directory=subfolders_initial[k]),args_volume))
 
       if (k==1) {
         summary_zones_calculation=polygons_summary

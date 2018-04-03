@@ -4,12 +4,10 @@
 \alias{zones_definition}
 \title{Function for internal use.}
 \usage{
-zones_definition(user_option = "Default", polygon_dataframe = NA)
+zones_definition(user_option = "Default")
 }
 \arguments{
-\item{user_option}{Default is "Default". It generates the 7 zones defined by Jimenez et a. (2015). Put anything different and set your own zones with the option below if you want.}
-
-\item{polygon_dataframe}{a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
+\item{user_option}{Default is "Default". It generates the 7 zones defined by Jimenez et a. (2015). Put anything different and set your own zones with the option below if you want. Otherwise, you must provide a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
 }
 \description{
 Definition of zones.

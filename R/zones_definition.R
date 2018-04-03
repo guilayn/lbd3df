@@ -3,8 +3,7 @@
 #' Definition of zones.
 #'
 #'
-#' @param user_option Default is "Default". It generates the 7 zones defined by Jimenez et a. (2015). Put anything different and set your own zones with the option below if you want.
-#' @param polygon_dataframe a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.
+#' @param user_option Default is "Default". It generates the 7 zones defined by Jimenez et a. (2015). Put anything different and set your own zones with the option below if you want. Otherwise, you must provide a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.
 #' @keywords 3D fluorescence
 #' @export
 #' @examples
@@ -12,8 +11,8 @@
 #' @references In progress
 #'
 zones_definition=function(
-                          user_option = "Default",
-                          polygon_dataframe= NA)
+                          user_option = "Default"
+                          )
                                                 {
 if (user_option == "Default") {
 
@@ -40,8 +39,8 @@ if (user_option == "Default") {
                       y=c(380,	380,	559.5,	380))
   polygons_df=rbind(polygon1,polygon2,polygon3,polygon4,polygon5,polygon6,polygon7)
 } else {
-  if (is.na(polygon_dataframe)) {stop("You didn't provide a data.frame containing the zones' polygons. Check ?zones_definition for details.")}
-  polygons_df=polygon_dataframe}
+  if (is.na(user_option)) {stop("You didn't provide a data.frame containing the zones' polygons. Check ?zones_definition for details.")}
+  polygons_df=user_option}
   return(polygons_df)
 }
 

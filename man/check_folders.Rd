@@ -29,10 +29,10 @@ check_folders(first_spectrum_line = 55, excitation_spectrum_line = 22,
 \item{directory}{Default is the working directory. Better not change it.}
 }
 \description{
-Internal use, this function simply checks the conformity of a folder containing Fluo3D .sp files.
+This function simply checks the conformity of a folder containing Fluo3D .sp files.
 }
 \examples{
-In progress
+check_folders()
 }
 \keyword{3D}
 \keyword{fluorescence}

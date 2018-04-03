@@ -6,7 +6,7 @@
 \usage{
 LBE_fluo3D_zones_volume(data_list = data_interpol, xy_vector_ = xy_vector,
   sample_name_ = sample_name, directory = directory_processing,
-  zones_polygons_ = "Default", polygon_dataframe_ = NA)
+  zones_polygons_ = "Default")
 }
 \arguments{
 \item{data_list}{The default value of "data_interpol" is assuming that "LBE_fluo3D_processing" have just been used. Otherwise a list containing x=vector of emission wavelenghts, y=vector of excitation wavelenghts, z= a matrix containing the z values (intensity) where X must be the lines, Y must be the columns and Z must be the values of the table.}
@@ -17,9 +17,7 @@ LBE_fluo3D_zones_volume(data_list = data_interpol, xy_vector_ = xy_vector,
 
 \item{directory}{Default is the working directory. Better not change it.}
 
-\item{zones_polygons_}{Default corresponds to the 7 zones defined in Jimenez et. al 2015.}
-
-\item{polygon_dataframe_}{a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
+\item{zones_polygons_}{Default corresponds to the 7 zones defined in Jimenez et. al 2015. Otherwise, you must provide a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.}
 }
 \description{
 Extraction of polygons volumes, as defined by zones().

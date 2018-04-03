@@ -12,8 +12,7 @@
 #' @param color_palette 1 to 6. Default is 1 for "viridis" (optimized for all types color blindness and with no loss of information for black and white printing). Use 2 for "gray.colors" if you want directly a black and white plot. You can select other interesting color scales such magma (3), plasma (4), inferno (5), terrain.colors (6),topo.colors (7) and cm.colors (8).
 #' @param directory Default is the working directory. Better not change it.
 #' @param sample_name_ Default is the output from processing function. Better not change it.
-#' @param zones_polygons_ Default corresponds to the 7 zones defined in Jimenez et. al 2015.
-#' @param polygon_dataframe_ a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.
+#' @param zones_polygons_ Default corresponds to the 7 zones defined in Jimenez et. al 2015. Otherwise, you must provide a data frame object containing three columns: one "id" column where you identify your zones for each xy coordinate. one "x" column where you put all the x coordinates (emission wavelenght). one "y" column where you put evey y coordinate (excitation wavelenght). The points of a polygon must be ordered in a way that the polygon is "closed" and must include repete the first point as a final point.
 #' @keywords 3D fluorescence
 #' @export
 #' @examples
@@ -32,8 +31,8 @@ LBE_fluo3D_levelplot=function(x=x_vector, #assuming that "LBE_fluo3D_processing"
                               color_palette=1,
                               directory=directory_processing,
                               sample_name_=sample_name,
-                              zones_polygons_="Default",
-                              polygon_dataframe_=NA) {
+                              zones_polygons_="Default"
+                              ) {
 
   #print(1)
   print("Setting directories")
@@ -45,7 +44,7 @@ LBE_fluo3D_levelplot=function(x=x_vector, #assuming that "LBE_fluo3D_processing"
   print("Defining polygons")
   if (plot_zones_polygons) {
 
-    list_polygons=zones_definition(zones_polygons_,polygon_dataframe_)
+    list_polygons=zones_definition(zones_polygons_)
 
     #### 1.2.2 3DF Zones, text coordinates ####
     for (i in 1:length(table(list_polygons[,1]))) {
@@ -64,7 +63,7 @@ LBE_fluo3D_levelplot=function(x=x_vector, #assuming that "LBE_fluo3D_processing"
 
 print("Working on plots")
   n_color=n_color
-list_colorfunction=list(viridis,gray.colors,magma,plasma,inferno,terrain.colors,topo.colors,cm.colors)
+list_colorfunction=list(viridis,gray.colors,magma,plasma,inferno,terrain.colors,topo.colors,cm.colors,matlab.like2)
 colorfunction=list_colorfunction[[color_palette]]
 #print(4)
   print(plot_ly(x=as.numeric(x),

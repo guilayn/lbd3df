@@ -1,6 +1,6 @@
 #' 3D Fluorescence spectrum processing
 #'
-#' Internal use, this function simply checks the conformity of a folder containing Fluo3D .sp files.
+#' This function simply checks the conformity of a folder containing Fluo3D .sp files.
 #'
 #' @param first_spectrum_line Normally you shouldn't change this. It is the first line containing the spectrum in the .sp files, 55 by default
 #' @param excitation_spectrum_line Normally you shouldn't change this. It is the line containing the selected excitation in the .sp files, 22 by default
@@ -14,7 +14,7 @@
 #' @keywords 3D fluorescence
 #' @export
 #' @examples
-#' In progress
+#' check_folders()
 
 check_folders=function(first_spectrum_line=55,
                                excitation_spectrum_line=22,
