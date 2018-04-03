@@ -27,7 +27,7 @@ LBE_fluo3D_levelplot(x = x_vector, y = y_vector, z = xy_vector,
 
 \item{n_color}{Number of colors that will be picked up in the color palette to build the color scale. Normally it is relevant only for color scales containing several colors.}
 
-\item{color_palette}{1 to 6. Default is 1 for "viridis" (optimized for all types color blindness and with no loss of information for black and white printing). Use 2 for "gray.colors" if you want directly a black and white plot. You can select other interesting color scales such magma (3), plasma (4), inferno (5), terrain.colors (6),topo.colors (7), cm.colors (8) and matlab.like2 (9). The last one is the same used in the references in the website of the International Humic Substances Society (2018).}
+\item{color_palette}{1 to 9. Default is 1 for "viridis" (optimized for all types color blindness and with no loss of information for black and white printing). Use 2 for "gray.colors" if you want directly a black and white plot. You can select other interesting color scales such magma (3), plasma (4), inferno (5), terrain.colors (6),topo.colors (7), cm.colors (8) and matlab.like2 (9). The last one is the same used in the references in the website of the International Humic Substances Society (2018).}
 
 \item{directory}{Default is the working directory. Better not change it.}
 
