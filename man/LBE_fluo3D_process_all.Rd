@@ -26,7 +26,7 @@ LBE_fluo3D_process_all(plot_all = TRUE, exci_spec = FALSE,
 
 \item{args_process}{List containing the conditions for the function LBE_fluo3D_processing. See individual help files for details (?LBE_fluo3D_processing)}
 
-\item{args_volume}{List containing the conditions for the function LBE_fluo3D_zones_volule. See individual help files for details (?LBE_fluo3D_levelplot)}
+\item{args_volume}{List containing the conditions for the function LBE_fluo3D_zones_volume. See individual help files for details (?LBE_fluo3D_zones_volume)}
 
 \item{args_plot}{List containing the conditions for the function LBE_fluo3D_levelplot. See individual help files for details (?LBE_fluo3D_levelplot)}
 

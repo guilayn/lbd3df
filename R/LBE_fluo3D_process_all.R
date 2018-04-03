@@ -18,7 +18,7 @@
 #' @param zones_calc Default = TRUE. Will include calculation of volumes and barycenters of each zone to every spectrum.
 #' @param args_process List containing the conditions for the function LBE_fluo3D_processing. See individual help files for details (?LBE_fluo3D_processing)
 #' @param args_plot List containing the conditions for the function LBE_fluo3D_levelplot. See individual help files for details (?LBE_fluo3D_levelplot)
-#' @param args_volume List containing the conditions for the function LBE_fluo3D_zones_volule. See individual help files for details (?LBE_fluo3D_levelplot)
+#' @param args_volume List containing the conditions for the function LBE_fluo3D_zones_volume. See individual help files for details (?LBE_fluo3D_zones_volume)
 #' @param args_exci List containing the conditions for the function excitation_spectrum. See individual help files for details (?excitation_spectrum)
 #' @param args_emi List containing the conditions for the function emission_spectrum. See individual help files for details (?emission_spectrum)
 #' @param args_indic List containing the conditions for the function LBE_fluo3D_indicators. See individual help files for details (?LBE_fluo3D_indicators)
@@ -72,6 +72,22 @@ LBE_fluo3D_process_all=function(
     if (emi_spec) {
       do.call(emission_spectrum,c(list(directory=subfolders_initial[k]),args_emi))}
 
+    if (zones_calc) {
+
+      do.call(LBE_fluo3D_zones_volume,c(list(directory=subfolders_initial[k]),args_volume))
+
+      if (k==1) {
+        summary_zones_calculation=polygons_summary
+      } else {
+        summary_zones_calculation=rbind(summary_zones_calculation,polygons_summary)} #add the next summary on the botton
+
+      if (k==number_subfolders) {
+        write.csv2(summary_zones_calculation,paste0(all_directory,"/Summary_zones_calculations.csv"),row.names = FALSE)
+        cast_summary_zones_calculation = dcast(summary_zones_calculation, sample ~ zone, value.var = "Vol_per", mean)
+        write.csv2(cast_summary_zones_calculation,paste0(all_directory,"/Summary_zones_calculations_Vol_per_CAST.csv"),row.names = FALSE)
+      }
+    }
+
     if (indic) {
 
       do.call(LBE_fluo3D_indicators,c(list(directory=subfolders_initial[k]),args_indic))
@@ -82,28 +98,15 @@ LBE_fluo3D_process_all=function(
         summary_indicators=data.frame(summary_indicators,summary_temp)}
 
       if (k==number_subfolders) {
-        write.csv2(t(summary_indicators),paste0(all_directory,"/Summary_3DF_indicators.csv"),row.names = FALSE)
+        if (zones_calc) {
+        complex_ratio = ddply(cast_summary_zones_calculation, .(sample), summarize, complex_ratio = (I + II + III)/(IV + V + VI + VII))
+        complex_ratio = complex_ratio[,2]
+        summary_indicators_final = t(summary_indicators)
+        summary_indicators_final=cbind(summary_indicators_final,complex_ratio = complex_ratio)
+        }
+        write.csv2(summary_indicators_final,paste0(all_directory,"/Summary_3DF_indicators.csv"),row.names = FALSE)
       }
       }
-
-    if (zones_calc) {
-
-      do.call(LBE_fluo3D_zones_volume,c(list(directory=subfolders_initial[k]),args_volume))
-
-      if (k==1) {
-        summary_zones_calculation=polygons_summary
-      } else {
-      summary_zones_calculation=rbind(summary_zones_calculation,polygons_summary)} #add the next summary on the botton
-
-if (k==number_subfolders) {
-      write.csv2(summary_zones_calculation,paste0(all_directory,"/Summary_zones_calculations.csv"),row.names = FALSE)
-  melt_summary_zones_calculation=melt(summary_zones_calculation[,c(1,2,4)],c("sample","zone"))
-  melt_summary_zones_calculation=melt_summary_zones_calculation[,-3]
-  colnames(melt_summary_zones_calculation)[3]="Vol_per"
-      write.csv2(melt_summary_zones_calculation,paste0(all_directory,"/Summary_zones_calculations_MELT.csv"),row.names = FALSE)
-}
-      }
-
 
 } #end of loop k
 } #end of the functions
