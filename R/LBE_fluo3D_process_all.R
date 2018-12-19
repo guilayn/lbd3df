@@ -99,7 +99,7 @@ LBE_fluo3D_process_all=function(
 
       if (k==number_subfolders) {
         if (zones_calc) {
-        complex_ratio = ddply(cast_summary_zones_calculation, .(sample), summarize, complex_ratio = (IV + V + VI + VII)/(I + II + III))
+        complex_ratio = ddply(cast_summary_zones_calculation, .(sample), summarize, complex_ratio = (IV + V + VI + VII)/(I + II + III)) # no
         complex_ratio = complex_ratio[,2]
         summary_indicators_final = t(summary_indicators)
         summary_indicators_final=cbind(summary_indicators_final,complex_ratio = complex_ratio)
