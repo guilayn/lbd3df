@@ -13,7 +13,7 @@
 #' @keywords 3D fluorescence
 #' @export
 #' @examples
-#' setwd(XXXX) #XXX is your directory contaning the .sp files (copy and paste from the brownse and replace all the "\" by "/").
+#' setwd(XXXX) #XXXX is your directory contaning the .sp files (copy and paste from the brownse and replace all the "\" by "/").
 #' LBE_fluo3D_processing() #include your options if you want.
 #' emission_spectrum(420) #export pdf of a emission spectrum plot at excitation = 420 nm
 
